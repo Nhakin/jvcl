@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
   Left = 353
   Top = 282
-  Width = 546
-  Height = 364
   Caption = 'Main test application for JvPlugin'
+  ClientHeight = 325
+  ClientWidth = 530
   Color = clBtnFace
   Constraints.MinHeight = 360
   Constraints.MinWidth = 540
@@ -22,15 +22,14 @@ object frmMain: TfrmMain
   object Splitter1: TSplitter
     Left = 161
     Top = 0
-    Width = 3
-    Height = 337
-    Cursor = crHSplit
+    Height = 325
+    ExplicitHeight = 337
   end
   object Memo1: TMemo
     Left = 164
     Top = 0
-    Width = 374
-    Height = 337
+    Width = 366
+    Height = 325
     Align = alClient
     ScrollBars = ssBoth
     TabOrder = 0
@@ -40,7 +39,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 161
-    Height = 337
+    Height = 325
     Align = alLeft
     BevelOuter = bvLowered
     TabOrder = 1

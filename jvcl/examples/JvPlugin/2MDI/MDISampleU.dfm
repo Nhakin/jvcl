@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 237
   Top = 149
-  Width = 522
-  Height = 388
   Caption = 'MDI Sample Program'
+  ClientHeight = 329
+  ClientWidth = 506
   Color = clBtnFace
   Constraints.MinHeight = 300
   Constraints.MinWidth = 400
@@ -25,7 +25,7 @@ object Form1: TForm1
   object panToolbar: TPanel
     Left = 0
     Top = 0
-    Width = 514
+    Width = 506
     Height = 29
     Align = alTop
     ParentShowHint = False
@@ -34,8 +34,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 315
-    Width = 514
+    Top = 310
+    Width = 506
     Height = 19
     Panels = <>
     SimplePanel = True

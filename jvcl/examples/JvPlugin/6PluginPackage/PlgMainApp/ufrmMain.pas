@@ -30,7 +30,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, JvPluginManager, ExtCtrls, JvComponent, JvPlgIntf;
+  StdCtrls, JvPluginManager, ExtCtrls, JvComponent, JvPlgIntf, JvComponentBase;
 
 type
   TfrmMain = class(TForm, IUnknown, IMyMainAppInterface)

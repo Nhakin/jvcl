@@ -30,7 +30,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, Menus, ComCtrls, Buttons, JvPluginManager, JvComponent;
+  ExtCtrls, Menus, ComCtrls, Buttons, JvPluginManager, JvComponent,
+  JvComponentBase, JvJVCLUtils;
 
 type
   TForm1 = class(TForm)
@@ -46,7 +47,7 @@ type
     procedure uilPluginManager1AfterLoading(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure uilPluginManager1NewCommand(Sender: TObject; ACaption, AHint,
-      AData: String; AShortCut: TShortCut; ABitmap: TBitmap;
+      AData: string; AShortCut: TShortCut; ABitmap: TJvBitmap;
       AEvent: TNotifyEvent);
   private
     { Private declarations }
@@ -72,14 +73,8 @@ begin
    Statusbar1.SimpleText := 'Plugins Loaded: ' + IntToStr(uilPluginManager1.PluginCount);
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
-begin
-   uilPluginManager1.LoadPlugins;
-end;
-
-
-procedure TForm1.uilPluginManager1NewCommand(Sender: TObject; ACaption,
-  AHint, AData: String; AShortCut: TShortCut; ABitmap: TBitmap;
+procedure TForm1.uilPluginManager1NewCommand(Sender: TObject; ACaption, AHint,
+  AData: string; AShortCut: TShortCut; ABitmap: TJvBitmap;
   AEvent: TNotifyEvent);
 var
    Item : TMenuItem;
@@ -103,5 +98,11 @@ begin
    end;    // with
    Inc(NumButtons);
 end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+   uilPluginManager1.LoadPlugins;
+end;
+
 
 end.

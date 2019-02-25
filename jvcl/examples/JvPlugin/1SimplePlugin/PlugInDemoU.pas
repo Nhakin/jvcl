@@ -30,7 +30,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  JvPluginManager, StdCtrls, Buttons, Menus, ExtCtrls, ImgList, JvComponent;
+  JvPluginManager, StdCtrls, Buttons, Menus, ExtCtrls, ImgList, JvComponent,
+  JvComponentBase;
 
 type
   TForm1 = class(TForm)
@@ -66,7 +67,7 @@ type
     procedure uilPluginManagerAfterLoad(Sender: TObject; FileName: String;
       const ALibHandle: Cardinal; var AllowLoad: Boolean);
     procedure uilPluginManagerNewCommand(Sender: TObject; ACaption, AHint,
-      AData: String; AShortCut: TShortCut; ABitmap: TBitmap;
+      AData: string; AShortCut: TShortCut; ABitmap: TJvBitmap;
       AEvent: TNotifyEvent);
   private
     { Private declarations }
@@ -96,6 +97,32 @@ end;
 procedure TForm1.uilPluginManagerBeforeLoading(Sender: TObject);
 begin
    lbStatus.Items.Add('Starting to load Plug-ins');
+end;
+
+procedure TForm1.uilPluginManagerNewCommand(Sender: TObject; ACaption, AHint,
+  AData: string; AShortCut: TShortCut; ABitmap: TJvBitmap;
+  AEvent: TNotifyEvent);
+var
+   Item : TMenuItem;
+begin
+   lbStatus.Items.Add('Adding command: ' + ACaption);
+   Item := NewItem(ACaption, scNone, False, True, AEvent, 0, '');
+   MainMenu1.Items[1].Add(Item);
+   with TSpeedButton.Create(Panel1) do
+   begin
+      Top := 4;
+      Left := 4+(NumButtons * Width);
+      Parent := Panel1;
+      Hint := AHint;
+      if ABitmap <> nil then
+         Glyph.Handle := ABitmap.Handle;
+      try
+         NumGlyphs := Glyph.Width div Glyph.Height;
+      except
+      end;
+      OnClick := AEvent;
+   end;    // with
+   Inc(NumButtons);
 end;
 
 procedure TForm1.clbPluginsClick(Sender: TObject);
@@ -131,32 +158,6 @@ procedure TForm1.uilPluginManagerAfterLoad(Sender: TObject;
 begin
    uilPluginManager.GetLoadedPlugins(clbPlugins.Items);
    lbStatus.Items.Add('Finished loading Plug-in: ' + Filename);
-end;
-
-procedure TForm1.uilPluginManagerNewCommand(Sender: TObject; ACaption,
-  AHint, AData: String; AShortCut: TShortCut; ABitmap: TBitmap;
-  AEvent: TNotifyEvent);
-var
-   Item : TMenuItem;
-begin
-   lbStatus.Items.Add('Adding command: ' + ACaption);
-   Item := NewItem(ACaption, scNone, False, True, AEvent, 0, '');
-   MainMenu1.Items[1].Add(Item);
-   with TSpeedButton.Create(Panel1) do
-   begin
-      Top := 4;
-      Left := 4+(NumButtons * Width);
-      Parent := Panel1;
-      Hint := AHint;
-      if ABitmap <> nil then
-         Glyph.Handle := ABitmap.Handle;
-      try
-         NumGlyphs := Glyph.Width div Glyph.Height;
-      except
-      end;
-      OnClick := AEvent;
-   end;    // with
-   Inc(NumButtons);
 end;
 
 end.
